@@ -17,7 +17,8 @@ use futures::{
 use std::{io::Error, net::SocketAddr};
 use thiserror::Error;
 use tokio_tungstenite::{accept_async, client_async, WebSocketStream};
-use tungstenite::{error::Error as WsError, Message};
+pub use tungstenite::error::Error as WsError;
+use tungstenite::Message;
 
 pub struct Socket {
     inner: Option<WebSocketStream<TokioCompat<TcpStream>>>,
