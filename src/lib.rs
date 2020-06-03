@@ -120,6 +120,12 @@ impl<T: NativeSocket> AbstractSocket for Socket<T> {}
 
 pub struct Provider<T>(PhantomData<T>);
 
+impl<T> Provider<T> {
+    pub fn new() -> Self {
+        Provider(PhantomData)
+    }
+}
+
 impl<T: NativeSocketConstructor + Send + 'static> SocketProvider for Provider<T>
 where
     T::Connect: Send,
@@ -174,6 +180,12 @@ pub trait NativeServer {
 }
 
 pub struct Server<T: NativeServer>(PhantomData<T>);
+
+impl<T: NativeServer> Server<T> {
+    pub fn new() -> Self {
+        Server(PhantomData)
+    }
+}
 
 impl<T: NativeServer> ServerProvider for Server<T>
 where
